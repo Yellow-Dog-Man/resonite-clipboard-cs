@@ -22,12 +22,12 @@
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="\"/>
         <None Include="../LICENSE" Pack="true" PackagePath="\"/>
-        <None Include="../bins/libresonite_clipboard_rs.so">
+        <None Include="../libs/libresonite_clipboard_rs.so">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <Pack>true</Pack>
             <PackagePath>runtimes/linux-x64/native/</PackagePath>
         </None>
-        <None Include="../bins/libresonite_clipboard_rs_arm64.so">
+        <None Include="../libs/libresonite_clipboard_rs_arm64.so">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <Pack>true</Pack>
             <PackagePath>runtimes/linux-arm64/native/</PackagePath>
