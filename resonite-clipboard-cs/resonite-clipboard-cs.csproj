@@ -6,6 +6,22 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageId>YellowDogMan.RSN-Clipboard</PackageId>
+        <Title>Resonite Clipboard C#</Title>
+        <Authors>Yellow Dog Man Studios s.r.o.</Authors>
+        <Company>Yellow Dog Man Studios s.r.o.</Company>
+        <Description>C# bindings for the Resonite clipboard Rust library.</Description>
+        <PackageProjectUrl>https://github.com/Yellow-Dog-Man/resonite-clipboard-cs/</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Yellow-Dog-Man/resonite-clipboard-cs/</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../README.md" Pack="true" PackagePath="\"/>
+        <None Include="../LICENSE" Pack="true" PackagePath="\"/>
+    </ItemGroup>
 
 </Project>
