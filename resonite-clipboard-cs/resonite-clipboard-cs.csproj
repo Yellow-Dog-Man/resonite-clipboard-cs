@@ -25,12 +25,12 @@
         <None Include="../libs/libresonite_clipboard_rs.so">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <Pack>true</Pack>
-            <PackagePath>runtimes/linux-x64/native/</PackagePath>
+            <PackagePath>runtimes/linux-x64/native/libresoniteclipboard_rs.so</PackagePath>
         </None>
         <None Include="../libs/libresonite_clipboard_rs_arm64.so">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <Pack>true</Pack>
-            <PackagePath>runtimes/linux-arm64/native/</PackagePath>
+            <PackagePath>runtimes/linux-arm64/native/libresoniteclipboard_rs.so</PackagePath>
         </None>
     </ItemGroup>
 
