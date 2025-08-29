@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Text;
 
 namespace resonite_clipboard_cs;
 
@@ -33,11 +34,11 @@ public static partial class ResoniteClipboard
     [LibraryImport(ClipboardLib, EntryPoint = "copy_with_type", StringMarshalling = StringMarshalling.Utf8)]
     public static partial void CopyWithType(byte[] data, uint data_length, string mime_type);
 
-    [LibraryImport(ClipboardLib, EntryPoint = "available_mime_types", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string? AvailableMimeTypes_Raw(out uint size);
+    [LibraryImport(ClipboardLib, EntryPoint = "available_mime_types")]
+    private static unsafe partial byte* AvailableMimeTypes_Raw(out uint size);
 
-    [LibraryImport(ClipboardLib, EntryPoint = "paste_text", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string? PasteText_Raw(out uint size);
+    [LibraryImport(ClipboardLib, EntryPoint = "paste_text")]
+    private static unsafe partial byte* PasteText_Raw(out uint size);
 
     [LibraryImport(ClipboardLib, EntryPoint = "paste_auto")]
     private static unsafe partial byte* PasteAuto_Raw(out uint size);
@@ -50,14 +51,40 @@ public static partial class ResoniteClipboard
     /// Queries available mime types currently in the wayland clipboard.
     /// </summary>
     /// <returns>An array of strings where each string is a mime type currently in the clipboard, or null if no mime types exist.</returns>
-    public static string[]? AvailableMimeTypes() => AvailableMimeTypes_Raw(out _)?.Split('\n').ToArray();
+    public static unsafe string[]? AvailableMimeTypes()
+    {
+        byte* mimesPtr = null;
+
+        try
+        {
+            mimesPtr = AvailableMimeTypes_Raw(out uint size);
+            return Encoding.UTF8.GetString(mimesPtr, (int)size)?.Split('\n').ToArray();
+        }
+        finally
+        {
+            NativeMemory.Free(mimesPtr);
+        }
+    }
 
 
     /// <summary>
     /// Pastes text from the wayland clipboard.
     /// </summary>
     /// <returns>Text that currently exists in the wayland clipboard, or null if no text exists.</returns>
-    public static string? PasteText() => PasteText_Raw(out _);
+    public static unsafe string? PasteText()
+    {
+        byte* strPtr = null;
+
+        try
+        {
+            strPtr = PasteText_Raw(out uint size);
+            return Encoding.UTF8.GetString(strPtr, (int)size);
+        }
+        finally
+        {
+            NativeMemory.Free(strPtr);
+        }
+    }
 
 
     /// <summary>
@@ -84,7 +111,7 @@ public static partial class ResoniteClipboard
         }
         finally
         {
-            Marshal.FreeHGlobal((nint)pastedPtr);
+            NativeMemory.Free(pastedPtr);
         }
 
         return pasted;
@@ -116,7 +143,7 @@ public static partial class ResoniteClipboard
         }
         finally
         {
-            Marshal.FreeHGlobal((nint)pastedPtr);
+            NativeMemory.Free(pastedPtr);
         }
 
         return pasted;
