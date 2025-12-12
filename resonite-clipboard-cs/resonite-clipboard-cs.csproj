@@ -22,15 +22,25 @@
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="\"/>
         <None Include="../LICENSE" Pack="true" PackagePath="\"/>
-        <None Include="../libs/libresonite_clipboard_rs.so">
+        <None Include="../bins/wl-copy_x64.bin">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <Pack>true</Pack>
-            <PackagePath>runtimes/linux-x64/native/libresonite_clipboard_rs.so</PackagePath>
+            <PackagePath>runtimes/linux-x64/native/wl-copy.bin</PackagePath>
         </None>
-        <None Include="../libs/libresonite_clipboard_rs_arm64.so">
+        <None Include="../bins/wl-paste_x64.bin">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <Pack>true</Pack>
-            <PackagePath>runtimes/linux-arm64/native/libresonite_clipboard_rs.so</PackagePath>
+            <PackagePath>runtimes/linux-x64/native/wl-paste.bin</PackagePath>
+        </None>
+        <None Include="../bins/wl-copy_arm64.bin">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Pack>true</Pack>
+            <PackagePath>runtimes/linux-arm64/native/wl-copy.bin</PackagePath>
+        </None>
+        <None Include="../bins/wl-paste_arm64.bin">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Pack>true</Pack>
+            <PackagePath>runtimes/linux-arm64/native/wl-paste.bin</PackagePath>
         </None>
     </ItemGroup>
 
